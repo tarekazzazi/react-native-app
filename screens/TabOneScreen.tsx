@@ -7,11 +7,14 @@ import * as ImagePicker from 'expo-image-picker';
 import ImageViewer from '../components/ImageViewer';
 import CircleButton from '../components/CircleButton';
 import IconButton from '../components/IconButton';
+import EmojiPicker  from "../components/EmojiPicker";
+
 
 const PlaceholderImage = require('../assets/images/Canada-Mountains.webp');
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAppOptions, setShowAppOptions] = useState(false);
+  const [isModalVisable,  setIsModalVisable] = useState(false);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -27,13 +30,20 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
     }
   };
 
-  // new code
+  // code to condense
   const onReset = () => {
+    // will condese later
     setShowAppOptions(false);
   };
 
   const onAddSticker = () => {
-    // we will implement later
+    // will condese later
+    setIsModalVisable(true);
+  };
+
+  const onModalClose = () => {
+    // will condese later
+    setIsModalVisable(false);
   };
 
   const onSaveImageAsync = async () => {
@@ -51,12 +61,16 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       {/* decides what to model to render */}
       {showAppOptions ? (
         // will move into model later...
-        <View style={styles.optionsContainer}>
-            <View style={styles.optionsRow}>
-              <IconButton icon="refresh" label="Reset" onPress={onReset} />
-              <CircleButton onPress={onAddSticker} />
-              <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
-            </View>
+          <View style={styles.optionsContainer}>
+              <View style={styles.optionsRow}>
+                <IconButton icon="refresh" label="Reset" onPress={onReset} />
+                <CircleButton onPress={onAddSticker} />
+                <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
+              </View>
+          
+          <EmojiPicker isVisible={isModalVisable} onClose={onModalClose}>
+
+          </EmojiPicker>
         </View>
       ) : (
         // will move into model later...
