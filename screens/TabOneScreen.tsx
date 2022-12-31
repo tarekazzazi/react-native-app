@@ -1,16 +1,18 @@
-import React from 'react';
+import Button from '../components/Button';
 import { StyleSheet, Image } from 'react-native';
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
-const PlaceholderImage = require('../assets/images/favicon.png');
+
+const PlaceholderImage = require('../assets/images/Canada-Mountains.webp');
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   return (
     <View style={styles.container}>
-      <Image source={PlaceholderImage} />
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Text> HELLO</Text>
-      <EditScreenInfo />
+      <View style={styles.imageContainer}>
+        <Image source={PlaceholderImage} style={styles.image} />
+      </View>
+        <Button theme="primary" label="Choose a photo" />
+        <Button theme="none" label="Use the photo" />
+
     </View>
   );
 }
@@ -20,6 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#25292e',
   },
   title: {
     fontSize: 20,
@@ -30,4 +33,14 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  imageContainer: {
+    flex: 1,
+    paddingTop: 25,
+    backgroundColor: '#25292e',
+  },
+  image: {
+    width: 320,
+    height: 340,
+    borderRadius: 10,
+  }
 });
