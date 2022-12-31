@@ -8,14 +8,15 @@ import ImageViewer from '../components/ImageViewer';
 import CircleButton from '../components/CircleButton';
 import IconButton from '../components/IconButton';
 import EmojiPicker  from "../components/EmojiPicker";
-
+import EmojiList  from  '../components/EmojiList';
 
 const PlaceholderImage = require('../assets/images/Canada-Mountains.webp');
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [isModalVisable,  setIsModalVisable] = useState(false);
-
+  const [pickedEmoji, setPickedEmoji] = useState(null);
+  
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -69,7 +70,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
               </View>
           
           <EmojiPicker isVisible={isModalVisable} onClose={onModalClose}>
-
+            <EmojiList onSelect={setPickedEmoji} onCloseMOdal={onModalClose} />
           </EmojiPicker>
         </View>
       ) : (

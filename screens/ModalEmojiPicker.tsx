@@ -1,27 +1,29 @@
-import EmojiPicker  from "../components/EmojiPicker";
-import { View, StyleSheet } from 'react-native';
-import { useState } from 'react';
+// Currently not being used 
 
-export default function ModelEmojiPicker(){
-    const [isModalVisable,  setIsModalVisable] = useState(false);
+// import EmojiPicker  from "../components/EmojiPicker";
+// import { View, StyleSheet } from 'react-native';
+// import { useState } from 'react';
 
-    const onAddSticker = () => {
-        setIsModalVisable(true);
-    };
+// export default function ModelEmojiPicker(){
+//     const [isModalVisable,  setIsModalVisable] = useState(false);
 
-    const onModalClose = () => {
-        setIsModalVisable(false);
-    }
-    return (
-        <View style={styles.container}> 
+//     const onAddSticker = () => {
+//         setIsModalVisable(true);
+//     };
+
+//     const onModalClose = () => {
+//         setIsModalVisable(false);
+//     }
+//     return (
+//         <View style={styles.container}> 
        
-        </View>
-    )
-};
+//         </View>
+//     )
+// };
 
-const styles = StyleSheet.create({
-    container: {
+// const styles = StyleSheet.create({
+//     container: {
 
-    }
-})
+//     }
+// })
 
