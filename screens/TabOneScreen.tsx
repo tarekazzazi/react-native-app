@@ -2,16 +2,32 @@ import Button from '../components/Button';
 import { StyleSheet, Image } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
+import * as ImagePicker from 'expo-image-picker';
 
 const PlaceholderImage = require('../assets/images/Canada-Mountains.webp');
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+    
+  const pickImageAsync = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      console.log(result);
+    } else {
+      alert('You did not select any image.');
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image source={PlaceholderImage} style={styles.image} />
       </View>
-        <Button theme="primary" label="Choose a photo" />
+      <View> 
+        <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
         <Button theme="none" label="Use the photo" />
+      </View>
 
     </View>
   );
