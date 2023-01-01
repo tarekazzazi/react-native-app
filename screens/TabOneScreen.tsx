@@ -7,8 +7,10 @@ import * as ImagePicker from 'expo-image-picker';
 import ImageViewer from '../components/ImageViewer';
 import CircleButton from '../components/CircleButton';
 import IconButton from '../components/IconButton';
+// later move into emoji module
 import EmojiPicker  from "../components/EmojiPicker";
 import EmojiList  from  '../components/EmojiList';
+import EmojiSticker from '../components/EmojiSticker';
 
 const PlaceholderImage = require('../assets/images/Canada-Mountains.webp');
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
@@ -16,7 +18,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [isModalVisable,  setIsModalVisable] = useState(false);
   const [pickedEmoji, setPickedEmoji] = useState(null);
-  
+
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -63,15 +65,22 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       {showAppOptions ? (
         // will move into model later...
           <View style={styles.optionsContainer}>
+            {/* After new menue bar is rendered this is what shows image */}
+              <View style={styles.imageContainer}>
+                <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
+                {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> : null}
+              </View>
+
               <View style={styles.optionsRow}>
                 <IconButton icon="refresh" label="Reset" onPress={onReset} />
                 <CircleButton onPress={onAddSticker} />
                 <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
               </View>
           
-          <EmojiPicker isVisible={isModalVisable} onClose={onModalClose}>
-            <EmojiList onSelect={setPickedEmoji} onCloseMOdal={onModalClose} />
-          </EmojiPicker>
+              <EmojiPicker isVisible={isModalVisable} onClose={onModalClose}>
+                <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+              </EmojiPicker>
+        
         </View>
       ) : (
         // will move into model later...
@@ -101,20 +110,26 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   imageContainer: {
+    marginTop: 20,
     flex: 1,
-    paddingTop: 25,
     backgroundColor: '#25292e',
   },
   footerContainer: {
-    flex: 1/3,
+    Top: 20,
     alignItems: 'center',
+    backgroundColor: '#25292e',
   },
   optionsContainer: {
+    paddingBottom: 20,
+    backgroundColor: '#25292e',
     position: 'absolute',
-    bottom: 80,
+
   },
   optionsRow: {
+    left: 10,
     alignItems: 'center',
     flexDirection: 'row',
+    backgroundColor: '#25292e',
+
   },
 });
