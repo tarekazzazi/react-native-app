@@ -51,38 +51,31 @@ export default function optionsModal(){
     
       return (
         <View style={styles.container}>
-       
+            <View style={styles.imageContainer}>
+              <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
+              {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> : null}
+            </View>
           {/* decides what to model to render */}
           {showAppOptions ? (
               <View style={styles.optionsContainer}>
-                {/* After new menue bar is rendered this is what shows image */}
-                  <View style={styles.imageContainer}>
-                    <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
-                    {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> : null}
-                  </View>
-    
                   <View style={styles.optionsRow}>
                     <IconButton icon="refresh" label="Reset" onPress={onReset} />
                     <CircleButton onPress={onAddSticker} />
                     <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
                   </View>
-              
+
                   <EmojiPicker isVisible={isModalVisable} onClose={onModalClose}>
                     <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
                   </EmojiPicker>
-            
-            </View>
+              </View>
+              
           ) : (
-            <View style={styles.optionsContainer}> 
-                <View style={styles.imageContainer}>
-                <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
-                {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> : null}
-                </View>
-                <View style={styles.footerContainer}> 
-                    <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
-                    <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
-                </View>
-          </View>
+            <View style={styles.optionsContainer}>
+              <View style={styles.footerContainer}> 
+                <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
+                <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
+              </View>
+            </View>
           )}
         </View>
      
@@ -106,6 +99,8 @@ export default function optionsModal(){
         width: '80%',
       },
       imageContainer: {
+        flex: 1,
+        margin: 20,
         alignItems: 'center',
         backgroundColor: '#25292e',
       },
@@ -114,12 +109,11 @@ export default function optionsModal(){
         backgroundColor: '#25292e',
       },
       optionsContainer: {
-        top: 10,
-        backgroundColor: '#25292e',
-        position: 'absolute',
+        flex: 1,
+        paddingTop: 250,
+        backgroundColor: 'transparent',
       },
       optionsRow: {
-        left: 10,
         alignItems: 'center',
         flexDirection: 'row',
         backgroundColor: '#25292e',
